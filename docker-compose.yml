@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  nsec-dns:
+    container_name: nsec-dns
+    restart: unless-stopped
+    build:
+      context: ./nsec-dns
+    environment:
+      - "TZ=UTC"
+    networks:
+      nsec: null
+    sysctls:
+      - "net.ipv6.conf.all.disable_ipv6=0"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - "./nsec-dns/entrypoint.sh:/entrypoint.sh"
+      - "./nsec-dns/vpn.ovpn:/vpn.conf"
+      - "./nsec-dns/ca.crt:/ca.crt"
+      - "./nsec-dns/dnsmasq.conf:/dnsmasq.conf"
+
+networks:
+  nsec:
+    name: nsec
+    driver: bridge

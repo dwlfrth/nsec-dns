@@ -1,3 +1,5 @@
+This should allow CTF participants to resolve NSEC infra domain names (nsec. and ctf.) All other DNS queries would be sent to CloudFlare DNS Servers (1.1.1.1 and 1.0.0.1)
+
 # Setting up the container
 1. `chmod +x nsec-dns/entrypoint.sh`
 2. Copy both the `team-XXX.ovpn` and `ca.crt` files under the nsec-dns subdirectory
